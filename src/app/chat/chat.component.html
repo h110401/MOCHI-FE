@@ -7,9 +7,7 @@
     </mat-button-toggle-group>
   </div>
   <div id="messages">
-    <div *ngIf="current == null">
-      Welcome to Chat Box
-    </div>
-    <app-chatbox-message *ngIf="current != null" [chat_box]="current"></app-chatbox-message>
+    <app-chatbox-message [chat_box]="current"></app-chatbox-message>
   </div>
 </div>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

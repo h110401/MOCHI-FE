@@ -13,6 +13,8 @@ import { ChatBoxInputComponent } from './chatbox-input/chatbox-input.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {NgxAutoScrollModule} from "ngx-auto-scroll";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {MatInputModule} from "@angular/material/input";
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    NgxAutoScrollModule,
+    NgxSpinnerModule
   ],
 })
 export class ChatModule { }

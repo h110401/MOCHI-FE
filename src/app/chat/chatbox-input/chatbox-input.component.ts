@@ -9,7 +9,7 @@ import {ChatBoxDetails} from "../../model/chat/ChatBoxDetails";
   styleUrls: ['./chatbox-input.component.scss']
 })
 export class ChatBoxInputComponent implements OnInit {
-  @Input() chat_box!: ChatBoxDetails;
+  @Input() chat_box: ChatBoxDetails | undefined;
 
   constructor(private chatService: ChatService) {
   }
@@ -18,12 +18,13 @@ export class ChatBoxInputComponent implements OnInit {
   }
 
   send(input: any) {
-    const chatObject: ChatObject = {
-      message: input.value,
-      chatBox: this.chat_box.chatBox
+    if (this.chat_box != undefined) {
+      const chatObject: ChatObject = {
+        message: input.value,
+        chatBox: this.chat_box.chatBox
+      }
+      this.chatService.sendMessageToChatBox(chatObject);
     }
-    console.log(chatObject);
-    this.chatService.sendMessageToChatBox(chatObject);
     input.value = '';
   }
 }

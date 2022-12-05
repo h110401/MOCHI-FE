@@ -1,24 +1,34 @@
-<div class="w-100 h-100 bg-light p-2" *ngIf="chat_box != undefined" id="chat_box_container" >
-  <div *ngFor="let mes of chat_box.messages; let i=index"
-       class="d-flex {{mes.user.username == username ? 'justify-content-end' : 'justify-content-start'}}">
-    <div style="width: 40px;height: 40px;">
-      <img
-        *ngIf="chat_box.messages.length == 1 || (mes.user.username != username && chat_box.messages[i].user.username != chat_box.messages[i - 1].user.username)"
-        src="{{mes.user.avatar}}" alt="avatar" class="rounded-circle border w-100 h-100 mt-2">
-    </div>
-    <mat-card
-      class="d-inline-block m-2"
-      style="clear: both; max-width: 50vw; word-break: break-all; {{mes.user.username == username ? 'background: lightblue' : ''}}"
-    >
-      {{mes.content}}
-      <mat-card-subtitle
-        *ngIf="i == chat_box.messages.length - 1 || chat_box.messages[i].user.username != chat_box.messages[i + 1].user.username"
-        class="{{mes.user.username == username ? 'text-end' : 'text-start'}}"
-        style="line-height: 20px; font-size: 12px"
+<!--main div for scrolling message-->
+<div *ngIf="chat_box == undefined" class="w-100 h-100">
+  Welcome to Chat Box
+</div>
+
+<div class="w-100 h-100 bg-light p-2" id="message_container" ngx-auto-scroll
+     [lock-y-offset]="lock_y_offset">
+  <div *ngIf="chat_box != undefined">
+    <div *ngFor="let mes of chat_box.messages; let i=index"
+         class="d-flex {{mes.user.username == username ? 'justify-content-end' : 'justify-content-start'}}">
+      <div style="width: 40px;height: 40px;">
+        <img
+          *ngIf="
+          mes.user.username != username && (chat_box.messages.length == 1 || i == 0 || chat_box.messages[i].user.username != chat_box.messages[i-1].user.username)
+          "
+          src="{{mes.user.avatar}}" alt="avatar" class="rounded-circle border w-100 h-100 mt-2">
+      </div>
+      <mat-card
+        class="d-inline-block m-2"
+        style="clear: both; max-width: 50vw; word-break: break-all; {{mes.user.username == username ? 'background: lightblue' : ''}}"
       >
-        {{mes.created | date:'HH:mm'}}
-      </mat-card-subtitle>
-    </mat-card>
+        {{mes.content}}
+        <mat-card-subtitle
+          *ngIf="i == chat_box.messages.length - 1 ? true : chat_box.messages[i].user.username != chat_box.messages[i + 1].user.username"
+          class="{{mes.user.username == username ? 'text-end' : 'text-start'}}"
+          style="line-height: 20px; font-size: 12px"
+        >
+          {{mes.created | date:'HH:mm'}}
+        </mat-card-subtitle>
+      </mat-card>
+    </div>
   </div>
 </div>
-<app-chatbox-input [chat_box]="chat_box"></app-chatbox-input>
+<app-chatbox-input *ngIf="chat_box != undefined" [chat_box]="chat_box"></app-chatbox-input>

@@ -7,11 +7,11 @@ app-chatbox-input {
   background: wheat;
 }
 
-#chat_box_container::-webkit-scrollbar {
+#message_container::-webkit-scrollbar {
   display: none;
 }
 
-#chat_box_container {
+#message_container {
   padding-bottom: 80px !important;
   overflow-y: scroll;
 }

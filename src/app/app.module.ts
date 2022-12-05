@@ -17,6 +17,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {HomeComponent} from "./home/home.component";
 import {AuthInterceptor} from "./service/auth/auth.interceptor";
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {DateAgoPipe} from "./pipes/date-ago.pipe";
     MatBadgeModule,
     HttpClientModule,
     MatToolbarModule,
+    NgxSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
