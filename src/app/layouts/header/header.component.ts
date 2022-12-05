@@ -15,11 +15,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   unread = false;
   subscription: Subscription;
   socket: MySocket;
+  username = ''
 
   constructor(private router: Router,
               private tokenService: TokenService,
               private chatService: ChatService) {
-
+    this.username = tokenService.getUsername();
     this.socket = chatService.socket;
     this.subscription = chatService.have_unread_message.subscribe({
       next: (data) => {

@@ -15,6 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {NgxAutoScrollModule} from "ngx-auto-scroll";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {LastMessagePipe} from "../pipes/last-message.pipe";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
     ChatComponent,
     ChatBoxComponent,
     DateAgoPipe,
+    LastMessagePipe,
     ChatBoxMessageComponent,
     ChatBoxInputComponent,
   ],

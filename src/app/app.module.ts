@@ -18,6 +18,7 @@ import {HomeComponent} from "./home/home.component";
 import {AuthInterceptor} from "./service/auth/auth.interceptor";
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
 import {NgxSpinnerModule} from "ngx-spinner";
+import { LastMessagePipe } from './pipes/last-message.pipe';
 
 @NgModule({
   declarations: [

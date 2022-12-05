@@ -46,4 +46,8 @@ export class ChatService {
     this.http.post(environment.API + '/ws/send_message', chatObject).subscribe();
   }
 
+  read(id: number) {
+    this.http.put(environment.API + '/ws/read/' + id, {}).subscribe()
+  }
+
 }

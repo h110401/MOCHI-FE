@@ -1,31 +1,31 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ChatService} from "./chat.service";
 import {ChatBoxDetails} from "../model/chat/ChatBoxDetails";
 import {ResponseChatObject} from "../model/chat/ResponseChatObject";
-import {NgxSpinner, NgxSpinnerService} from "ngx-spinner";
+
+const CURRENT_CHAT_BOX_KEY = 'CURRENT_CHAT_BOX_KEY'
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewInit {
+export class ChatComponent implements OnInit {
   chat_boxes: ChatBoxDetails[] = [];
   current: ChatBoxDetails | undefined;
 
-  constructor(private chatService: ChatService,
-              private spinner: NgxSpinnerService) {
-
-    spinner.show();
+  constructor(private chatService: ChatService) {
 
     chatService.chatBoxList().subscribe({
       next: (data) => {
         this.chat_boxes = data
       }, complete: () => {
-        let item = sessionStorage.getItem("CURRENT_CHAT_BOX");
-        if (item) {
+        let item = sessionStorage.getItem(CURRENT_CHAT_BOX_KEY);
+        if (item != null) {
           for (let cb of this.chat_boxes) {
             if (cb.chatBox.id == Number(item)) {
+              chatService.read(cb.id);
+              cb.status = 'READ'
               this.current = cb;
             }
           }
@@ -37,6 +37,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
       for (let cb of this.chat_boxes) {
         if (cb.chatBox.id == data.chatBox.id) {
           cb.messages.push(data.message);
+          if (cb.id != this.current?.id) {
+            cb.status = 'UNREAD';
+          }
         }
       }
     });
@@ -45,8 +48,24 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit(): void {
-    this.spinner.hide();
-  }
+  onButtonToggleChange($event: any) {
+    let details = ($event.value as ChatBoxDetails);
+    let readAll = true;
+    for (let cb of this.chat_boxes) {
+      if (cb.id == details.id) {
+        this.chatService.read(cb.id);
+        cb.status = 'READ';
+      }
+      if (cb.status == 'UNREAD') {
+        readAll = false;
+      }
+    }
 
+    if (readAll) {
+      this.chatService.$unread.next(false);
+    }
+
+    let id = details.chatBox.id;
+    sessionStorage.setItem(CURRENT_CHAT_BOX_KEY, String(id));
+  }
 }

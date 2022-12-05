@@ -27,8 +27,4 @@ export class ChatBoxMessageComponent implements OnInit, OnChanges {
       this.viewChild.forceScrollDown();
     }
   }
-
-  log(mes: Message) {
-    console.log(mes);
-  }
 }

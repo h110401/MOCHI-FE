@@ -1,8 +1,10 @@
-<div class="w-100 h-100 bg-success d-flex" style="padding-top: 60px; overflow: hidden">
+<div class="w-100 bg-success d-flex" style="overflow: hidden; height: calc(100% - 60px)">
   <div id="chat_boxes">
-    <mat-button-toggle-group vertical [(ngModel)]="current">
+    <mat-button-toggle-group vertical [(ngModel)]="current" (change)="onButtonToggleChange($event)">
       <mat-button-toggle *ngFor="let cb of chat_boxes" [value]="cb">
-        <app-chatbox [chat_box]="cb" style="height: 60px"></app-chatbox>
+        <app-chatbox [lastMessage]="cb.messages.length > 0 ? cb.messages[cb.messages.length - 1] : undefined"
+                     [chat_box]="cb" style="height: 60px"
+        ></app-chatbox>
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
