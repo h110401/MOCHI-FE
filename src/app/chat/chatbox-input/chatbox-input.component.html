@@ -1,0 +1,22 @@
+<div class="w-100 h-100 position-relative" style="display:grid; grid-template-columns: auto 100px">
+  <div class="bg-success d-flex justify-content-evenly align-items-center pe-1">
+    <div>
+      <button mat-icon-button>
+        <mat-icon>emoji_emotions</mat-icon>
+      </button>
+    </div>
+    <input matInput type="new-password"
+           class="px-4"
+           style="line-height: 16px; font-size: 16px; width: 92%; height: 80%;border-radius: 50px"
+           placeholder="Enter a message..."
+           autocomplete="off"
+           #input
+           (keyup.enter)="send(input)"
+    >
+  </div>
+  <div class="border-secondary d-flex justify-content-center align-items-center">
+    <button mat-icon-button (click)="send(input)">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>

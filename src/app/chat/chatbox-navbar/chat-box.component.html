@@ -1,0 +1,20 @@
+<div class="py-2 d-flex">
+  <div class="chat-box-avatar">
+    <img src="{{avatar}}" alt="avatar" width="60" height="60" class="rounded-circle border">
+  </div>
+  <div class="chat-box-content d-lg-flex d-none justify-content-between" style="width: 150px">
+    <div class="d-flex flex-column justify-content-around p-2">
+      <h3 class="p-0 m-0 text-start" style="line-height: 12px">
+        {{chat_box.chatBox.name}}
+      </h3>
+      <mat-card-subtitle style="font-size: 12px; line-height: 12px" [className]="chat_box.status.toString() == 'UNREAD' ? 'unread' : ''">
+        {{lastMessageContent}}
+      </mat-card-subtitle>
+    </div>
+    <div>
+      <mat-card-subtitle style="font-size: 12px; line-height: 12px">
+        {{lastMessageDate | dateAgo}}
+      </mat-card-subtitle>
+    </div>
+  </div>
+</div>

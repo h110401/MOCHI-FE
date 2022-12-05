@@ -1,0 +1,17 @@
+app-chatbox-input {
+  position: absolute;
+  height: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: wheat;
+}
+
+#chat_box_container::-webkit-scrollbar {
+  display: none;
+}
+
+#chat_box_container {
+  padding-bottom: 80px !important;
+  overflow-y: scroll;
+}

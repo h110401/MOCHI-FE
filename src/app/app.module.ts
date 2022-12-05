@@ -16,14 +16,13 @@ import {HeaderComponent} from "./layouts/header/header.component";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {HomeComponent} from "./home/home.component";
 import {AuthInterceptor} from "./service/auth/auth.interceptor";
-import { FooterComponent } from './layouts/footer/footer.component';
+import {DateAgoPipe} from "./pipes/date-ago.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
     MatToolbarModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

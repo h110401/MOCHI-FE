@@ -1,0 +1,29 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {ChatService} from "../chat.service";
+import {ChatObject} from "../../model/chat/ChatObject";
+import {ChatBoxDetails} from "../../model/chat/ChatBoxDetails";
+
+@Component({
+  selector: 'app-chatbox-input',
+  templateUrl: './chatbox-input.component.html',
+  styleUrls: ['./chatbox-input.component.scss']
+})
+export class ChatBoxInputComponent implements OnInit {
+  @Input() chat_box!: ChatBoxDetails;
+
+  constructor(private chatService: ChatService) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  send(input: any) {
+    const chatObject: ChatObject = {
+      message: input.value,
+      chatBox: this.chat_box.chatBox
+    }
+    console.log(chatObject);
+    this.chatService.sendMessageToChatBox(chatObject);
+    input.value = '';
+  }
+}

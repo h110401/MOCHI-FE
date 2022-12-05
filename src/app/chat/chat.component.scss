@@ -1,0 +1,13 @@
+#chat_boxes {
+  height: 100%;
+  background: lightcoral;
+  display: inline-block;
+}
+
+#messages {
+  height: 100%;
+  background: lightblue;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
