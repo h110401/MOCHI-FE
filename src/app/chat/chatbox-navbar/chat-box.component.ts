@@ -10,7 +10,7 @@ import {Message} from "../../model/chat/Message";
 })
 export class ChatBoxComponent implements OnInit {
 
-  @Input() chat_box!: ChatBoxDetails
+  @Input() chat_box: any;
   @Input() lastMessage: Message | undefined;
   avatar = '';
 
@@ -19,8 +19,8 @@ export class ChatBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('chat box', this.chat_box);
     const username = this.tokenService.getUsername();
-
     if (this.chat_box.users.length > 2) {
       this.avatar = 'https://cdn-icons-png.flaticon.com/512/166/166258.png';
     } else {

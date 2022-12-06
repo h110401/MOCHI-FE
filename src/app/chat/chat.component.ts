@@ -15,9 +15,9 @@ export class ChatComponent implements OnInit {
   current: ChatBoxDetails | undefined;
 
   constructor(private chatService: ChatService) {
-
     chatService.chatBoxList().subscribe({
       next: (data) => {
+        console.log('chat box data', data);
         this.chat_boxes = data
       }, complete: () => {
         let item = sessionStorage.getItem(CURRENT_CHAT_BOX_KEY);
@@ -43,11 +43,9 @@ export class ChatComponent implements OnInit {
           if (cb.id != this.current?.id) {
             cb.status = 'UNREAD';
             chatService.unread.next(true);
-            console.log('vao day')
           }
         }
       }
-
     });
   }
 
