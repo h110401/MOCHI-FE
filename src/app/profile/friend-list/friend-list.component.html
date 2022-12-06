@@ -1,1 +1,15 @@
-<p>friend-list works!</p>
+<h1 class="p-3 m-0">
+  Friend List
+</h1>
+<mat-card *ngFor="let user of data">
+  <div class="d-flex align-items-center">
+    <div>
+      <img src="{{user.avatar}}" alt="avatar"
+           style="border-radius: 50%; width: 60px;height: 60px;border: 2px solid #d3d3d3">
+    </div>
+    <div style="font-size: 20px; margin-left: 15px;">
+      {{user.firstName ? user.firstName + ' ' + user.lastName : user.lastName}}
+    </div>
+  </div>
+
+</mat-card>

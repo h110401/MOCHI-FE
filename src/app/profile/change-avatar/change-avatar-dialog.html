@@ -1,1 +1,28 @@
-change avatar
+<h2 mat-dialog-title>Upload Avatar</h2>
+<div mat-dialog-content>
+  <p>Upload your avatar! Your avatar will be cropped to square!</p>
+  <div class="border border-3 rounded-3 border-secondary border-opacity-75 mt-2 overflow-hidden position-relative">
+    <image-cropper style="height: 200px; width: 200px"
+                   [imageChangedEvent]="imageChangedEvent"
+                   [maintainAspectRatio]="true"
+                   [aspectRatio]="1"
+                   [resizeToHeight]="600"
+                   [cropperMinWidth]="300"
+                   [alignImage]="'left'"
+                   format="png"
+                   (imageCropped)="imageCropped($event)"
+                   (imageLoaded)="imageLoaded()"
+                   (cropperReady)="cropperReady($event)"
+                   (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    <div
+      class="position-absolute h-100 top-0 end-0 d-flex align-items-center justify-content-center flex-column"
+      style="width: calc(100% - 200px)">
+      <button mat-raised-button color="primary" (click)="uploadAvatar()">Upload</button>
+      <mat-progress-bar mode="determinate" [value]="progress"
+                        style="width: 60%; margin-top: 10px"></mat-progress-bar>
+    </div>
+  </div>
+</div>
+
+<!--            <img [src]="croppedImage" width="200" height="200" style="float: right">-->

@@ -1,24 +1,55 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <button mat-flat-button routerLink="/" style="cursor: pointer; background:none;font-size: 25px">Mochi</button>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
-  <button mat-raised-button routerLink="profile/{{username}}">Profile</button>
-  <button
-    mat-raised-button
-    routerLink="/chat"
-    color="primary"
-    [matBadge]="this.unread ? '&#8288;' : ''"
-    matBadgeColor="warn"
-    matBadgeSize="small"
-  >Chat
-  </button>
-  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
-</mat-toolbar>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark p-0" style="min-height: 60px">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/"
+       (click)="collapseNav()"
+    >
+      <img src="assets/icon.png" alt="icon" width="40" height="40" class="rounded-circle">
+      Mochi
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="collapse.toggle()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ngx-navbar-collapse class="collapse navbar-collapse" #collapse="ngxNavbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item py-3 py-lg-0">
+          <div class="input-group">
+            <button class="btn btn-outline-secondary" type="button" #search (click)="searchUser(searchInput)"><i
+              class="bi bi-search"></i></button>
+            <input type="text" class="form-control" placeholder="Search user" (keyup.enter)="search.click()"
+                   #searchInput>
+          </div>
+        </li>
+        <li class="nav-item ms-0 ms-lg-3">
+          <button
+            class="btn btn-outline-light w-100"
+            routerLink="/profile/{{username}}"
+            (click)="collapseNav()"
+          >Profile
+          </button>
+        </li>
+        <li class="nav-item ms-0 ms-lg-3 ">
+          <button
+            class="btn btn-outline-primary w-100"
+            routerLink="/chat"
+            [matBadge]="this.unread ? '&#8288;' : ''"
+            matBadgeColor="warn"
+            matBadgeSize="small"
+            matBadgeOverlap="true"
+            (click)="collapseNav()"
+          >Chat
+          </button>
+        </li>
+        <li class="nav-item ms-0 ms-lg-3">
+          <button class="btn btn-outline-danger w-100"
+                  (click)="logout()"
+          >Logout
+          </button>
+        </li>
+      </ul>
+    </ngx-navbar-collapse>
+  </div>
+</nav>

@@ -14,8 +14,8 @@ import {Message} from "../model/chat/Message";
 })
 export class ChatService {
   socket: MySocket;
-  $unread = new BehaviorSubject(false);
-  have_unread_message = this.$unread.asObservable();
+  unread = new BehaviorSubject(false);
+  have_unread_message = this.unread.asObservable();
 
   constructor(private http: HttpClient,
               private tokenService: TokenService) {
@@ -29,7 +29,7 @@ export class ChatService {
     this.http.get(environment.API + '/ws/connect').subscribe({
       next: (data) => {
         if (data == true) {
-          this.$unread.next(true);
+          this.unread.next(true);
         }
       },
       complete: () => {

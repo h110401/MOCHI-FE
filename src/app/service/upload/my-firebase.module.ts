@@ -1,12 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {environment} from "../../../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireModule} from "@angular/fire/compat";
 
-
+const config = environment.firebaseConfig
 
 @NgModule({
-  declarations: [],
   imports: [
-    CommonModule
+    AngularFireModule.initializeApp(config),
+    AngularFireStorageModule
+  ],
+  exports: [
+    AngularFireModule,
+    AngularFireStorageModule
   ]
 })
-export class MyFirebaseModule { }
+export class MyFirebaseModule {
+}

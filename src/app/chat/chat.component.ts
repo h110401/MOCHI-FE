@@ -22,13 +22,16 @@ export class ChatComponent implements OnInit {
       }, complete: () => {
         let item = sessionStorage.getItem(CURRENT_CHAT_BOX_KEY);
         if (item != null) {
+          let readAll = true;
           for (let cb of this.chat_boxes) {
             if (cb.chatBox.id == Number(item)) {
               chatService.read(cb.id);
               cb.status = 'READ'
               this.current = cb;
             }
+            if (cb.status == 'UNREAD') readAll = false;
           }
+          if (readAll) chatService.unread.next(false);
         }
       }
     });
@@ -39,9 +42,12 @@ export class ChatComponent implements OnInit {
           cb.messages.push(data.message);
           if (cb.id != this.current?.id) {
             cb.status = 'UNREAD';
+            chatService.unread.next(true);
+            console.log('vao day')
           }
         }
       }
+
     });
   }
 
@@ -62,7 +68,7 @@ export class ChatComponent implements OnInit {
     }
 
     if (readAll) {
-      this.chatService.$unread.next(false);
+      this.chatService.unread.next(false);
     }
 
     let id = details.chatBox.id;

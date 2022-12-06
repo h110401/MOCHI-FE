@@ -1,1 +1,42 @@
-<p>search works!</p>
+<div class="container border">
+  <div class="row row-cols-1 row-cols-lg-2 p-4 border gy-3">
+    <div class="col border" *ngFor="let data of datas">
+      <mat-card style="max-width: 500px; margin:auto">
+        <mat-card-header>
+          <button mat-icon-button routerLink="/profile/{{data.user.username}}" style="width: 60px;height: 60px;">
+            <img src="{{data.user.avatar}}" alt="avatar"
+                 style="width: 60px;height: 60px;border-radius: 50%; border: 2px solid #d3d3d3">
+          </button>
+          <div style="font-size: 20px" class="d-flex align-items-center px-3">
+            {{data.user.firstName ? data.user.firstName + ' ' + data.user.lastName : data.user.lastName}}
+          </div>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="ms-auto me-3 d-flex align-items-center justify-content-center"
+               [style.visibility]="data.status == 'FRIEND' || data.user.username == username ? 'hidden' : ''"
+          >
+            <ng-template [ngIf]="data.status != 'WAITING'">
+              <button [className]="data.status == 'NOT_FRIEND' ? 'btn btn-outline-success' : 'btn btn-outline-danger'"
+                      (click)="sendFriendRequest(data)"
+              >
+                {{data.status == 'NOT_FRIEND' ? 'ADD FRIEND' : 'CANCEL REQUEST'}}
+              </button>
+            </ng-template>
+            <ng-template [ngIf]="data.status == 'WAITING'">
+              <button class="btn btn-outline-success me-3"
+                      (click)="acceptFriendRequest(data)"
+              >
+                ACCEPT
+              </button>
+              <button class="btn btn-outline-danger"
+                      (click)="sendFriendRequest(data)"
+              >
+                DECLINE
+              </button>
+            </ng-template>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

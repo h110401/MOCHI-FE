@@ -16,15 +16,19 @@ import {HeaderComponent} from "./layouts/header/header.component";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {HomeComponent} from "./home/home.component";
 import {AuthInterceptor} from "./service/auth/auth.interceptor";
-import {DateAgoPipe} from "./pipes/date-ago.pipe";
 import {NgxSpinnerModule} from "ngx-spinner";
-import { LastMessagePipe } from './pipes/last-message.pipe';
+import {MyFirebaseModule} from "./service/upload/my-firebase.module";
+import {NgxNavbarModule} from "ngx-bootstrap-navbar";
+import {Error404Component} from "./error.404/error.404.component";
+import { DefaultComponent } from './home/default/default.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
+    Error404Component,
+    DefaultComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { LastMessagePipe } from './pipes/last-message.pipe';
     MatBadgeModule,
     HttpClientModule,
     MatToolbarModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MyFirebaseModule,
+    NgxNavbarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

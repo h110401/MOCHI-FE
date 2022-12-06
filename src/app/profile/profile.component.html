@@ -1,14 +1,42 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col justify-content-center d-flex">
-      <mat-card>
-        <mat-card-header>
-          <h3>
-            {{user?.firstName ? user?.firstName + ' ' + user?.lastName : user?.lastName}}
-          </h3>
-        </mat-card-header>
-      </mat-card>
-    </div>
+<div class="container bg-light p-0">
+  <div style="width: 100%;height: 300px;background:lightpink;border-bottom: 3px solid white; overflow: hidden">
   </div>
+  <div style="transform: translate(50%,-50%); display: inline-block">
+    <button mat-icon-button style="width: 150px;height: 150px;border-radius: 50%" class="shadow-sm">
+      <img src="{{user?.avatar}}" alt="avatar"
+           style="width: 150px;height: 150px;border-radius: 50%; border: 5px solid white">
+    </button>
+    <button *ngIf="isUserLogin"
+      mat-icon-button mat-flat-button class="shadow-sm" style="transform: translate(-110%,120%)"
+            (click)="inputFile.click()" title="Upload avatar">
+      <mat-icon>
+        edit
+      </mat-icon>
+    </button>
+    <input type="file" (change)="fileChangeEvent($event)" #inputFile hidden>
+    <span style="display: inline-block">
+      <div style="font-size: 30px; transform: translate(20%,200%)">
+      {{user?.firstName ? user?.firstName + ' ' + user?.lastName : user?.lastName}}
+      </div>
+    </span>
+  </div>
+  <mat-divider style="position: relative; top: -50px"></mat-divider>
+  <div style="margin-top: -40px">
+    <nav ngxNavbarDynamicExpand class="navbar-light bg-light">
+      <ngx-navbar-collapse #collapse="ngxNavbarCollapse">
+        <ul class="navbar-nav ">
+          <li class="nav-item ms-3">
+            <button class="btn btn-outline-dark" routerLink="friend">
+              Friends
+            </button>
+          </li>
+        </ul>
+      </ngx-navbar-collapse>
+      <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
+        ....
+      </button>
+    </nav>
+  </div>
+  <mat-divider style="margin-top: 8px"></mat-divider>
+  <router-outlet></router-outlet>
 </div>
-

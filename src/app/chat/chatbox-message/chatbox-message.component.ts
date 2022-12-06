@@ -13,7 +13,7 @@ export class ChatBoxMessageComponent implements OnInit, OnChanges {
   @Input() chat_box: ChatBoxDetails | undefined;
   @ViewChild(NgxAutoScroll) viewChild!: NgxAutoScroll;
   username = '';
-  lock_y_offset = 0;
+  lock_y_offset = 10;
 
   constructor(private tokenService: TokenService) {
     this.username = tokenService.getUsername();
